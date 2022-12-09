@@ -6,6 +6,7 @@
 #include <netinet/in.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 
 
 //removes letters from a string
@@ -71,7 +72,7 @@ int main() {
 	  close(client_socket);
 	//write data received from client to text file
 	//checks if message  is the authorized length
-	if(strlen(client_message) == 17) {
+	if(strlen(client_message) == 17 && strstr(client_message, "@") == NULL) {
 		printf("The client sent data %s\n", client_message);
 		//prints client message to log.txt
 		fprintf(fp, "%s\n" , client_message);
@@ -80,6 +81,19 @@ int main() {
 		fprintf(fp,"\n chars:\n");
 		fprintf(fp,"%s\n",parseChars(client_message));
 		}
+	else if (strstr(client_message, "@") != NULL) {
+		printf("user login saved");
+		time_t now = time(&now);
+		char buffer[256];
+		struct tm *ptm = gmtime(&now);
+	
+		strftime(buffer,80,"%x - %I:%m%p", ptm);
+		
+		
+		//prints client message to log.txt
+		fprintf(fp, "%s", client_message);
+		fprintf(fp, " %s\n ", buffer);	
+	}
 	else {
 		printf("unauthorized message\n");
 	}
