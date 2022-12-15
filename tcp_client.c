@@ -51,7 +51,9 @@ int main (int argc, char *argv[]) {
 	
 	//close socket
 	close(netsocket);
-	
+	if(argv[4]) {
+		break;	
+	}
 	sleep(60);
 	}	
 	return 0;

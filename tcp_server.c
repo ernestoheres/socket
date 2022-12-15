@@ -78,7 +78,7 @@ int main() {
 		fprintf(fp, "%s\n" , client_message);
 		fprintf(fp, " ints:\n");
 		parseInts(fp,client_message);
-		fprintf(fp,"\n chars:\n");
+		fprintf(fp,"\n chars!\n");
 		fprintf(fp,"%s\n",parseChars(client_message));
 		}
 	else if (strstr(client_message, "@") != NULL) {
