@@ -7,7 +7,11 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
-
+/*
+IMPLEMENT:
+C server should except an argument for the ip address
+Fix the print statements not working
+*/
 
 //removes letters from a string
 void parseInts(FILE* fp,char* string){
@@ -73,16 +77,14 @@ int main() {
 	//write data received from client to text file
 	//checks if message  is the authorized length
 	if(strlen(client_message) == 17 && strstr(client_message, "@") == NULL) {
-		printf("The client sent data %s\n", client_message);
 		//prints client message to log.txt
 		fprintf(fp, "%s\n" , client_message);
 		fprintf(fp, " ints:\n");
 		parseInts(fp,client_message);
-		fprintf(fp,"\n chars!\n");
+		fprintf(fp,"\n chars:\n");
 		fprintf(fp,"%s\n",parseChars(client_message));
 		}
 	else if (strstr(client_message, "@") != NULL) {
-		printf("user login saved");
 		time_t now = time(&now);
 		char buffer[256];
 		struct tm *ptm = gmtime(&now);
